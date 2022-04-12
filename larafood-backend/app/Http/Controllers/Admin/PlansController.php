@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PlanRequest;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -34,7 +35,7 @@ class PlansController extends Controller
         return view('admin.pages.plans.create');
     }
 
-    public function store(Request $request)
+    public function store(PlanRequest $request)
     {
         $data = $request->all();
         $data['url'] = Str::kebab($request->name);
@@ -69,7 +70,7 @@ class PlansController extends Controller
         return redirect()->route('admin.plans.index');
     }
 
-    public function search(Request $request)
+    public function search(PlanRequest $request)
     {
         $filters = $request->except('_token');
         $plans = $this->planRepository->search($request->input('filter'));
