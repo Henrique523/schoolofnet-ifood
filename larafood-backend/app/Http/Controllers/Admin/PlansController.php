@@ -40,6 +40,6 @@ class PlansController extends Controller
         $data['url'] = Str::kebab($request->name);
         $this->planRepository->create($data);
 
-        return redirect()->route('plans.index');
+        return redirect()->route('admin.plans.index');
     }
 }

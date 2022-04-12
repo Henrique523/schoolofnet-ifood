@@ -3,9 +3,16 @@
 use App\Http\Controllers\Admin\PlansController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('admin/plans', [PlansController::class, 'index'])->name('plans.index');
-Route::get('admin/plans/create', [PlansController::class, 'create'])->name('plans.create');
-Route::post('admin/plans', [PlansController::class, 'store'])->name('plans.store');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('plans')->name('plans.')->group(function() {
+        Route::get('/', [PlansController::class, 'index'])->name('index');
+        Route::get('/{plan}', [PlansController::class, 'show'])->name('show');
+        Route::get('/create', [PlansController::class, 'create'])->name('create');
+
+        Route::post('plans', [PlansController::class, 'store'])->name('store');
+    });
+});
+
 
 Route::get('/', function () {
     return view('welcome');
