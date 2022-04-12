@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PlanRequest;
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PlansController extends Controller
 {
@@ -37,10 +36,7 @@ class PlansController extends Controller
 
     public function store(PlanRequest $request)
     {
-        $data = $request->all();
-        $data['url'] = Str::kebab($request->name);
-        $this->planRepository->create($data);
-
+        $this->planRepository->create($request->all());
         return redirect()->route('admin.plans.index');
     }
 
