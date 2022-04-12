@@ -21,6 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('plans')->name('plans.')->group(function () {
-        Route::post('store', [PlansController::class, 'store'])->name('store');
+        Route::get('/{id}', [PlansController::class, 'show'])->name('show');
+
+        Route::post('/store', [PlansController::class, 'store'])->name('store');
+
+        Route::delete('/{id}', [PlansController::class, 'store'])->name('destroy');
     });
 });

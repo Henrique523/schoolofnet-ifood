@@ -42,4 +42,30 @@ class PlansController extends Controller
 
         return redirect()->route('admin.plans.index');
     }
+
+    public function show(int $id)
+    {
+        $plan = $this->planRepository->find($id);
+
+        if(! $plan) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.show', [
+            'plan' => $plan,
+        ]);
+    }
+
+    public function destroy(int $id)
+    {
+        $plan = $this->planRepository->find($id);
+
+        if(! $plan) {
+            return redirect()->back();
+        }
+
+        $plan->delete();
+
+        return redirect()->route('admin.plans.index');
+    }
 }
