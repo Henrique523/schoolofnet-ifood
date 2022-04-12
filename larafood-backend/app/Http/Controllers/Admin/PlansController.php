@@ -79,4 +79,30 @@ class PlansController extends Controller
             'filters' => $filters,
         ]);
     }
+
+    public function edit(int $id)
+    {
+        $plan = $this->planRepository->find($id);
+
+        if(! $plan) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.edit', [
+            'plan' => $plan,
+        ]);
+    }
+
+    public function update(int $id, Request $request)
+    {
+        $plan = $this->planRepository->find($id);
+
+        if(! $plan) {
+            return redirect()->back();
+        }
+
+        $plan->update($request->all());
+
+        return redirect()->route('admin.plans.index');
+    }
 }

@@ -12,8 +12,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [PlansController::class, 'index'])->name('index');
         Route::get('/create', [PlansController::class, 'create'])->name('create');
         Route::get('/{id}', [PlansController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [PlansController::class, 'edit'])->name('edit');
 
-        Route::post('plans', [PlansController::class, 'store'])->name('store');
+        Route::post('/', [PlansController::class, 'store'])->name('store');
+
+        Route::put('/{id}', [PlansController::class, 'update'])->name('update');
 
         Route::delete('/{id}', [PlansController::class, 'destroy'])->name('destroy');
     });
